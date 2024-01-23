@@ -15,7 +15,7 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Optional<Person> getPerson(int id) {
+    public Optional<Person> getPerson(final int id) {
         return personRepository.findById(id);
     }
 
@@ -23,11 +23,12 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public void deletePerson(int id) {
+    public void deletePerson(final int id) {
         personRepository.deleteById(id);
     }
 
     public Person savePerson(Person person) {
-        return personRepository.save(person);
+        Person saved = personRepository.save(person);
+        return saved;
     }
 }

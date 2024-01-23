@@ -24,13 +24,9 @@ public class PersonController {
     }
 
     @GetMapping("/person/{id}")
-    public Person getPerson(@PathVariable("id") int id) {
+    public Person getPerson(@PathVariable("id") final int id) {
         Optional<Person> person = personService.getPerson(id);
-        if (person.isPresent()) {
-            return person.get();
-        } else {
-            return null;
-        }
+        return person.orElse(null);
     }
 
     @PutMapping("/person/{id}")
