@@ -11,14 +11,14 @@ import java.util.Date;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="idperson")
     private int id;
 
-    @Column(name="firstname")
+    //@Column(name="firstname")
     private String firstname;
 
-    @Column(name="lastname")
+    //@Column(name="lastname")
     private String lastname;
 
 }

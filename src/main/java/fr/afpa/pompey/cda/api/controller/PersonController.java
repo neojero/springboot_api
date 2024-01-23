@@ -13,7 +13,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @PostMapping("/person")
+    @PostMapping(value = { "/person"})
     public Person createPerson(@RequestBody Person person) {
         return personService.savePerson(person);
     }
