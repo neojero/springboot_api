@@ -29,7 +29,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Start MySQL
-    - run:
+    - run: |
       sudo /etc/init.d/mysql start
       mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
       mysql -e "USE $DB_DATABASE;"
