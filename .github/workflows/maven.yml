@@ -20,21 +20,27 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DB_DATABASE: sparadrap
+      DB_NAME: sparadrap
       DB_USER: root
-      DB_PASSWORD: root  
+      DB_PASSWORD: root
+
+    services:
+      mysql: 
+        image: mysql:latest
+        env: 
+          MYSQL_DATABASE: sparadrap
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+        ports:
+          - 3306:3306
 
     steps:
     - name: Checkout code
     - uses: actions/checkout@v4
 
     - name: Start MySQL
-      run: |
-      sudo /etc/init.d/mysql start
-      mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
-      mysql -e "USE $DB_DATABASE;"
-      mysql -e "CREATE TABLE PERSON (idperson int not null PRIMARY KEY AUTO_INCREMENT, lastname varchar(45), firstname varchar(45));"
-      mysql -e "INSERT INTO PERSON VALUES (1, 'neo', 'jero');"
+      run: | 
+        mysql --host=127.0.0.1 --user=${{ env.DB_NAME }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
 
     - name: Set up JDK 17
       # v4 node.js runtime v20
