@@ -42,9 +42,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Start MySQL
+      - name: Create Database MySQL
         run: mysql -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_NAME }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-        # run: mysql --host=127.0.0.1 --user=${{ env.DB_USER }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
+
+      - name: Start MySQL
+        run: mysql --host=127.0.0.1 --user=${{ env.DB_USER }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
 
       - name: Set up JDK 17
       # v4 node.js runtime v20
@@ -58,6 +60,8 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package
+
+      - name: Copy Jar in staging  
         run: mkdir staging && cp target/*.jar staging
 
       # permet de charger un artefact
