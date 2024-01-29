@@ -28,9 +28,9 @@ jobs:
       mysql: 
         image: mysql:latest
         env: 
-          MYSQL_DATABASE: sparadrap
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
+          MYSQL_DATABASE: ${{ env.DB_NAME }}
+          MYSQL_USER: ${{ env.DB_USER }}
+          MYSQL_PASSWORD: ${{ env.DB_PASSWORD }}
         ports:
           - 3306:3306
 
@@ -39,8 +39,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Start MySQL
-      run: | 
-        mysql --host=127.0.0.1 --user=${{ env.DB_NAME }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
+      run: mysql --host=127.0.0.1 --user=${{ env.DB_NAME }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
 
     - name: Set up JDK 17
       # v4 node.js runtime v20
