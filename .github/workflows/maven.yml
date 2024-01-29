@@ -19,8 +19,23 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      DB_DATABASE: sparadrap
+      DB_USER: root
+      DB_PASSWORD: root  
+
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v4
+
+    - name: Start MySQL
+    - run:
+      sudo /etc/init.d/mysql start
+      mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
+      mysql -e "USE $DB_DATABASE;"
+      mysql -e "CREATE TABLE PERSON (idperson int not null PRIMARY KEY AUTO_INCREMENT, lastname varchar(45), firstname varchar(45));"
+      mysql -e "INSERT INTO PERSON VALUES (1, 'neo', 'jero');"
+
     - name: Set up JDK 17
       # v4 node.js runtime v20
       uses: actions/setup-java@v4
@@ -28,6 +43,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         architecture: x64
+        # met en cache les dépendances de maven
         cache: maven
     - name: Build with Maven
       run: mvn -B package 
