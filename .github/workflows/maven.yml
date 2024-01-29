@@ -42,11 +42,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Start MySQL
+        run : sudo service mysql start
+
       - name: Create Database MySQL
         run: mysql -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_NAME }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
-      - name: Start MySQL
-        run: mysql --host=127.0.0.1 --user=${{ env.DB_USER }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
+      #- name: Connect MySQL
+      #  run: mysql --host=127.0.0.1 --user=${{ env.DB_USER }} --password=${{ env.DB_PASSWORD }} ${{ env.DB_NAME }}
 
       - name: Set up JDK 17
       # v4 node.js runtime v20
