@@ -47,10 +47,9 @@ jobs:
       - name: Start MySQL
         run : sudo service mysql start
 
-      - name: Create Database MySQL
-        - run: mysql -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_NAME }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-        - run: mysql -e 'CREATE TABLE IF NOT EXISTS ${{ env.DB_NAME }}.${{ env.DB_TABLE }} (idperson INT NOT NULL PRIMARY KEY, lastname varchar(45), firstname varchar(45));' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-        - run: mysql -e 'INSERT INTO ${{ env.DB_NAME }}.${{ env.DB_TABLE }} VALUES (1, 'DOE', 'John');' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+      - run: mysql -e 'CREATE DATABASE IF NOT EXISTS ${{ env.DB_NAME }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+      - run: mysql -e 'CREATE TABLE IF NOT EXISTS ${{ env.DB_NAME }}.${{ env.DB_TABLE }} (idperson INT NOT NULL PRIMARY KEY, lastname varchar(45), firstname varchar(45));' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+      - run: mysql -e 'INSERT INTO ${{ env.DB_NAME }}.${{ env.DB_TABLE }} VALUES (1, 'DOE', 'John');' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
       - name: Set up JDK 17
       # v4 node.js runtime v20
