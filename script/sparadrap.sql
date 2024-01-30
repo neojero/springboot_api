@@ -39,7 +39,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'test','test'),(4,'DOE','John'),(5,'WOOD','Alex'),(6,'boe','jero'),(20,'doe','john');
+INSERT INTO `person` VALUES (1,'DOE','John'),(2,'WOOD','Alex'),(3,'neo','jero');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
