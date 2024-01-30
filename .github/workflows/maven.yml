@@ -40,14 +40,32 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           architecture: x64
-          # met en cache les dépendances de maven
-          cache: maven
 
-      - name: Build with Maven
-        run: mvn -B package
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-      - name: Copy Jar in staging  
-        run: mkdir staging && cp target/*.jar staging
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+       - name: Build and analyze
+        env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=neojero_springboot_api
+
+      #- name: Build with Maven
+      #  run: mvn -B package
+
+      #- name: Copy Jar in staging  
+      #  run: mkdir staging && cp target/*.jar staging
 
       # permet de charger un artefact
       #- name: Charging artefact
