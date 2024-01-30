@@ -14,6 +14,8 @@
 	<name>api</name>
 	<description>API project with Spring Boot</description>
 	<properties>
+		<sonar.organization>neojero</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
