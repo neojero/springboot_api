@@ -1,8 +1,10 @@
 package fr.afpa.pompey.cda.api;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,10 +15,15 @@ public class SeleniumTest {
     @BeforeEach
     public void setUp() {
         // emplacement du pilote Chrome
-        System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
 
         // Instanciation du pilote Chrome
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @Test
