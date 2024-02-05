@@ -1,6 +1,7 @@
 package fr.afpa.pompey.cda.api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
