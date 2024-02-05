@@ -17,10 +17,11 @@ public class PersonControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Test
     public void getPersonsTest() throws Exception {
         mockMvc.perform(get("/persons"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].firstname", is("test")));
+                .andExpect(jsonPath("$[0].firstname", is("John")));
     }
 }
