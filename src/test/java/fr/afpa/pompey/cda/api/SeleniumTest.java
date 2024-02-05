@@ -8,32 +8,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeleniumTest {
     private WebDriver driver;
-    //private final String url = "D:PROJETS\JAVA\SPRINGBOOT\api\driver\chromedriver.exe";
+    //private final String url = ;
 
     @BeforeEach
     public void setUp() {
         // emplacement du pilote Chrome
-     //   System.setProperty("webdriver.chrome.driver", url);
+        System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
 
         // Instanciation du pilote Chrome
-       // driver = new ChromeDriver();
+        driver = new ChromeDriver();
     }
 
     @Test
     public void testPageTitle() {
         // Accédez à une URL
-      //  driver.get("https://www.afpa.fr");
+        driver.get("https://www.afpa.fr");
 
         // Récupérez le titre de la page
-      //  String title = driver.getTitle();
+        String title = driver.getTitle();
 
         // Vérifiez si le titre est correct
-     //   assertEquals("Afpa : formation professionnelle, formation adulte, formation-continue, VAE // AFPA  | Afpa", title);
+        assertEquals("Afpa : formation professionnelle, formation adulte, formation-continue, VAE // AFPA | Afpa", title);
     }
 
     @AfterEach
     public void tearDown() {
         // Fermez le navigateur
-       // driver.quit();
+        driver.quit();
     }
 }

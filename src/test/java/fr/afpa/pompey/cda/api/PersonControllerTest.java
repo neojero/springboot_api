@@ -19,7 +19,7 @@ public class PersonControllerTest {
 
     @MockBean
     private PersonService personService;
-    
+
     @Test
     public void getPersonsTest() throws Exception {
         mockMvc.perform(get("/persons")).andExpect(status().isOk());
