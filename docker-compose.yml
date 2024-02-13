@@ -2,24 +2,33 @@ version: '3.8'
 
 services:
   mysql:
-    container_name: api-mysql
-    restart: always
-    image: mysql:latest
+    container_name: mysql-for-api
+    restart: 'always'
+    image: mysql:8.3.0
     volumes:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
       - ${LOG_DIR_MYSQL}:/var/log/mysql
       - ${MYSQL_DUMP_DIR}:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }
-      MYSQL_DATABASE: ${{ secrets.DB_HOSTNAME }}
-
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MY_DATABASE}
+    ports:
+        - "9006:3306"
+    networks:
+      - app
 
   your_app:
-    build: .
+    image: ${API_IMAGE_NAME}
     ports:
       - "9000:9000"  # Port d'exposition de l'application
     depends_on:
       - mysql
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
 
 volumes:
-  mysql_data:  # Définition du volume pour stocker les données MySQL
+  data:  # Définition du volume pour stocker les données MySQL
