@@ -44,7 +44,7 @@ jobs:
         run: mysql -u${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} -e "source script/sparadrap.sql"
 
       - name: Install Chrome Browser for selenium
-        uses: browser-actions/setup-chrome@v1
+        uses: browser-actions/setup-chrome@latest
 
       - name: run Chrome Browser for version control
         run: chrome --version
@@ -133,9 +133,9 @@ jobs:
         run: ls ${{ github.workspace }}
 
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile
           push: true
-          tags: jboebionapi:latest
+          tags: apimage:latest
