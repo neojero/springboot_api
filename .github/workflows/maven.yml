@@ -138,4 +138,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: apimage:latest
+          tags: ${{ secrets.DOCKERHUB_USER }}/apimage:latest
