@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 public class PersonServiceMockTest {
-
     /**
      * Dans ce test Mockito, nous utilisons @Mock pour créer un mock de PersonRepository
      * et @InjectMocks pour injecter ce mock dans PersonService.
@@ -26,12 +25,10 @@ public class PersonServiceMockTest {
      * Ensuite, nous appelons la méthode getPerson de PersonController avec l'ID 1
      * et vérifions que la réponse est correcte.
      */
-
     @Mock
     private PersonRepository personRepository;
     @InjectMocks
     private PersonService personService;
-
     @Test
     public void GetPersonByIdTest() {
         // Création d'une personne fictive pour le test

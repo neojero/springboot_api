@@ -11,21 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SeleniumTest {
     private WebDriver driver;
     //private final String url = ;
-
     @BeforeEach
     public void setUp() {
-        // emplacement du pilote Chrome
-        //System.setProperty("webdriver.chrome.driver", "driver\\chromedriver.exe");
 
         // Instanciation du pilote Chrome
+        // recherche auto de driver
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        // options du navigateur
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
+        // chargement du driver
         driver = new ChromeDriver(options);
     }
-
     @Test
     public void testPageTitle() {
         // Accédez à une URL
@@ -37,7 +36,6 @@ public class SeleniumTest {
         // Vérifiez si le titre est correct
         assertEquals("Afpa : formation professionnelle, formation adulte, formation-continue, VAE // AFPA | Afpa", title);
     }
-
     @AfterEach
     public void tearDown() {
         // Fermez le navigateur
