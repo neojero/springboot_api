@@ -11,4 +11,4 @@ FROM arnfi1150/17-jdk-alpine
 EXPOSE 9000
 
 # Commande pour exécuter l'application Spring Boot lorsque le conteneur démarre
-CMD ["java", "-jar", "package.jar"]
+CMD ["java", "-jar", "api-0.0.1-SNAPSHOT.jar"]
