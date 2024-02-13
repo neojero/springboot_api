@@ -44,7 +44,7 @@ jobs:
         run: mysql -u${{ secrets.DB_USER }} -p${{ secrets.DB_PASSWORD }} -e "source script/sparadrap.sql"
 
       - name: Install Chrome Browser for selenium
-        uses: browser-actions/setup-chrome@latest
+        uses: browser-actions/setup-chrome@v1
 
       - name: run Chrome Browser for version control
         run: chrome --version
@@ -77,15 +77,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=neojero_springboot_api
 
-      - name: Copy Jar in staging
-        run: mkdir staging && cp target/*.jar staging
-
       # permet de charger un artefact
       - name: Charging artefact
         uses: actions/upload-artifact@v4
         with:
          name: package.jar
-         path: staging
+         path: target/*.jar
          retention-days: 1
 
       # message de fin indiquant que tout s'est bien passé
@@ -116,24 +113,28 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Set Up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@latest
 
       - name: Set Up Docker Build
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@latest
 
       - name: Connect to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@latest
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Download a single artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@latest
         with:
           name: package.jar
 
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@latest
         with:
           context: .
           file: Dockerfile
