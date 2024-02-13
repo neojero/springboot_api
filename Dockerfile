@@ -11,4 +11,4 @@ ADD target/*.jar appapi.jar
 EXPOSE 8090
 
 # Commande pour exécuter l'application Spring Boot lorsque le conteneur démarre
-CMD ["java", "-jar", "/app/appapi.jar"]
+CMD ["java", "-jar", "package.jar"]
