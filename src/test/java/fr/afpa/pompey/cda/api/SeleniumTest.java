@@ -16,7 +16,7 @@ public class SeleniumTest {
 
         // Instanciation du pilote Chrome
         // recherche auto de driver
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         // options du navigateur
         options.addArguments("--no-sandbox");

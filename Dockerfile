@@ -1,8 +1,13 @@
-# Utilisation d'une image de base OpenJDK pour exécuter l'application Java
-FROM arnfi1150/17-jdk-alpine
+FROM openjdk:17-alpine
 
-# expose le port à l'exterieur du conteneur
+# Exposer le port 9011
 EXPOSE 9000
 
-# Commande pour exécuter l'application Spring Boot lorsque le conteneur démarre
+# Répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copie du fichier JAR de votre projet dans le conteneur
+COPY api-0.0.1-SNAPSHOT.jar /app/api-0.0.1-SNAPSHOT.jar
+
+# Commande pour exécuter le fichier JAR
 CMD ["java", "-jar", "api-0.0.1-SNAPSHOT.jar"]
