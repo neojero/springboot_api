@@ -160,7 +160,7 @@ jobs:
       - name: Build and Push Docker image from Docker Compose
         run: |
             docker-compose -f docker-compose.yml build
-            docker-compose -f docker-compose.yml push
+            docker-compose -f docker-compose.yml push mysql
 
       # message de fin indiquant que tout s'est bien passé
       - run: echo "🍏 This job's status is ${{ job.status }}."
