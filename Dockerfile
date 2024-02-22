@@ -1,4 +1,4 @@
-FROM openjdk:17-jre-slim
+FROM openjdk:17
 
 # Exposer le port 9011
 EXPOSE 9000
