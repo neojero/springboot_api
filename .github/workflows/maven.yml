@@ -45,7 +45,7 @@ jobs:
 
       - name: Add hosts to /etc/hosts
         run: |
-          sudo echo "127.0.0.1 api" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 mysql_server" | sudo tee -a /etc/hosts
 
       - name: Start MySQL
         run : sudo service mysql start
