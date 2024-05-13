@@ -139,32 +139,17 @@ jobs:
       # message de fin indiquant que tout s'est bien passé
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  build-and-push-container:
-    # vérifie que le déclenchement provient de la branche main
-    if: ${{ github.ref == 'refs/heads/main' }}
+  # Notification
+  Discord:
+    name: Discord
     runs-on: ubuntu-latest
-    needs:
-      - docker-build-image-api
+    needs: docker-build-image-api
+
     steps:
-      - name : Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set Up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set Up Docker Build
-        uses: docker/setup-buildx-action@v3
-
-      - name: Connect to Docker Hub
-        uses: docker/login-action@v3
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+        uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Build and Push Docker image from Docker Compose
-        run: |
-            docker-compose -f docker-compose.yml build
-            docker-compose -f docker-compose.yml push mysql
-
-      # message de fin indiquant que tout s'est bien passé
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          description: 'The project Reverso has been deployed.'
