@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: SpringBoot API CI/CD with Maven and docker
 
 on:
   push:
@@ -148,8 +148,8 @@ jobs:
     steps:
       - name: Discord notification
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
-          description: 'The project Reverso has been deployed.'
+          description: 'The project SpringBoot API has been deployed.'
