@@ -134,7 +134,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/apimage:apimage-latest
+          tags: ${{ secrets.DOCKERHUB_USER }}/apimage:latest
 
       # message de fin indiquant que tout s'est bien passé
       - run: echo "🍏 This job's status is ${{ job.status }}."
